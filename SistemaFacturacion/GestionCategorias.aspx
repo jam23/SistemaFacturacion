@@ -1,21 +1,66 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionCategorias.aspx.cs" Inherits="SistemaFacturacion.GestionCategorias" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="GestionCategorias.aspx.cs" Inherits="SistemaFacturacion.GestionCategorias" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-        <asp:EntityDataSource ID="CategoriasDataSource" runat="server" AutoSort="False" ConnectionString="name=FACTURACIONEntities" DefaultContainerName="FACTURACIONEntities" EnableFlattening="False" EntitySetName="CATEGORIA" EntityTypeFilter="CATEGORIA" OrderBy="" Select="it.[id], it.[descripcion], it.[estado]">
-        </asp:EntityDataSource>
-        <asp:GridView ID="gvCategorias" AutoGenerateColumns="true" runat="server" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1">           
-        </asp:GridView>
-    
+    <% Page.Header.Title = "Categorias"; %>
+    <!-- DataTables JavaScript -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%=gvCategorias.ClientID%>').DataTable();
+        });
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <asp:Label ID="Label1" runat="server" Text="Id"></asp:Label>
+                <asp:TextBox ID="txtId" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+            </div>
+        </div>
     </div>
-    </form>
-</body>
-</html>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <asp:Label ID="Label2" runat="server" Text="Descripción"></asp:Label>
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <asp:Label ID="Label3" runat="server" Text="Estado"></asp:Label>
+                <asp:DropDownList runat="server" ID="ddlEstado" CssClass="form-control">
+                    <asp:ListItem Selected="True" Value="A">Activo</asp:ListItem>
+                    <asp:ListItem Value="I">Inactivo</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary" OnClick="btnCrear_Click" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click"/>
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click"/>
+                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click"/>               
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <asp:GridView ID="gvCategorias" runat="server" AutoGenerateColumns="true"
+                CssClass="table table-striped table-bordered table-hover dataTable no-footer">
+                <Columns>
+                    <asp:TemplateField HeaderText="ID">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lkbIdCategoria" runat="server" Text='<%# Bind("id") %>' OnClick="lkbIdCategoria_Click"></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    </div>
+</asp:Content>
