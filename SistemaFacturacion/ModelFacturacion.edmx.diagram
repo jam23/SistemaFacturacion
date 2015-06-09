@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4e0d87b011c49e9951d257f1affd025" Name="Diagram1">
+        <EntityTypeShape EntityType="FACTURACIONModel.ARTICULOS" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.CLIENTES" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.CONDICIONESPAGO" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.DETALLE_FACTURA" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.FACTURAS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.VENDEDORES" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="FACTURACIONModel.FK_ARTICULOS" ManuallyRouted="false" />
+        <AssociationConnector Association="FACTURACIONModel.FK_CATEGORIA" ManuallyRouted="false" />
+        <AssociationConnector Association="FACTURACIONModel.FK_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="FACTURACIONModel.FK_CONDICION_PAGO" ManuallyRouted="false" />
+        <AssociationConnector Association="FACTURACIONModel.FK_FACTURAS" ManuallyRouted="false" />
+        <AssociationConnector Association="FACTURACIONModel.FK_VENDEDOR" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

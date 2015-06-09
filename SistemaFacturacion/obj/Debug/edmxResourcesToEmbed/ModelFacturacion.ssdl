@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FACTURACIONModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FACTURACIONModelStoreContainer">
+    <EntitySet Name="ARTICULOS" EntityType="FACTURACIONModel.Store.ARTICULOS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CATEGORIA" EntityType="FACTURACIONModel.Store.CATEGORIA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CLIENTES" EntityType="FACTURACIONModel.Store.CLIENTES" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONDICIONESPAGO" EntityType="FACTURACIONModel.Store.CONDICIONESPAGO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DETALLE_FACTURA" EntityType="FACTURACIONModel.Store.DETALLE_FACTURA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FACTURAS" EntityType="FACTURACIONModel.Store.FACTURAS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VENDEDORES" EntityType="FACTURACIONModel.Store.VENDEDORES" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ARTICULOS" Association="FACTURACIONModel.Store.FK_ARTICULOS">
+      <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CATEGORIA" Association="FACTURACIONModel.Store.FK_CATEGORIA">
+      <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+      <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTE" Association="FACTURACIONModel.Store.FK_CLIENTE">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICION_PAGO" Association="FACTURACIONModel.Store.FK_CONDICION_PAGO">
+      <End Role="CONDICIONESPAGO" EntitySet="CONDICIONESPAGO" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FACTURAS" Association="FACTURACIONModel.Store.FK_FACTURAS">
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENDEDOR" Association="FACTURACIONModel.Store.FK_VENDEDOR">
+      <End Role="VENDEDORES" EntitySet="VENDEDORES" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ARTICULOS">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="idCategoria" Type="int" Nullable="false" />
+    <Property Name="costoUnitario" Type="float" Nullable="false" />
+    <Property Name="precioUnitario" Type="float" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CATEGORIA">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombreComercial" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="razonSocial" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="RNC_CED" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="cuentaContable" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="telefono" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="contraseña" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CONDICIONESPAGO">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="cantidadDias" Type="int" Nullable="false" />
+    <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="DETALLE_FACTURA">
+    <Key>
+      <PropertyRef Name="idFactura" />
+      <PropertyRef Name="idArticulo" />
+    </Key>
+    <Property Name="idFactura" Type="int" Nullable="false" />
+    <Property Name="idArticulo" Type="int" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="precioUnitario" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FACTURAS">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idCondicionPago" Type="int" Nullable="false" />
+    <Property Name="idVendedor" Type="int" Nullable="false" />
+    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
+    <Property Name="comentario" Type="varchar" MaxLength="3000" />
+  </EntityType>
+  <EntityType Name="VENDEDORES">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombres" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="apellido1" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="apellido2" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="porcientoComision" Type="float" Nullable="false" />
+    <Property Name="contraseña" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <Association Name="FK_ARTICULOS">
+    <End Role="ARTICULOS" Type="FACTURACIONModel.Store.ARTICULOS" Multiplicity="1" />
+    <End Role="DETALLE_FACTURA" Type="FACTURACIONModel.Store.DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARTICULOS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DETALLE_FACTURA">
+        <PropertyRef Name="idArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CATEGORIA">
+    <End Role="CATEGORIA" Type="FACTURACIONModel.Store.CATEGORIA" Multiplicity="1" />
+    <End Role="ARTICULOS" Type="FACTURACIONModel.Store.ARTICULOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ARTICULOS">
+        <PropertyRef Name="idCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTE">
+    <End Role="CLIENTES" Type="FACTURACIONModel.Store.CLIENTES" Multiplicity="1" />
+    <End Role="FACTURAS" Type="FACTURACIONModel.Store.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICION_PAGO">
+    <End Role="CONDICIONESPAGO" Type="FACTURACIONModel.Store.CONDICIONESPAGO" Multiplicity="1" />
+    <End Role="FACTURAS" Type="FACTURACIONModel.Store.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONDICIONESPAGO">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="idCondicionPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FACTURAS">
+    <End Role="FACTURAS" Type="FACTURACIONModel.Store.FACTURAS" Multiplicity="1" />
+    <End Role="DETALLE_FACTURA" Type="FACTURACIONModel.Store.DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURAS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DETALLE_FACTURA">
+        <PropertyRef Name="idFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENDEDOR">
+    <End Role="VENDEDORES" Type="FACTURACIONModel.Store.VENDEDORES" Multiplicity="1" />
+    <End Role="FACTURAS" Type="FACTURACIONModel.Store.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VENDEDORES">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="idVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
