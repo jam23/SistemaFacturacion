@@ -18,3 +18,6 @@ Default skin template. The following skins are provided as examples only.
                     <asp:ListItem Selected="True" Value="A">Activo</asp:ListItem>
                     <asp:ListItem Value="I">Inactivo</asp:ListItem>
                 </asp:DropDownList>
+
+
+ <asp:TextBox runat="server" CssClass="form-control" ></asp:TextBox>
