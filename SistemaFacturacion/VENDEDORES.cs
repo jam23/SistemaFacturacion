@@ -23,9 +23,10 @@ namespace SistemaFacturacion
         public string nombres { get; set; }
         public string apellido1 { get; set; }
         public string apellido2 { get; set; }
-        public double porcientoComision { get; set; }
+        public int porcientoComision { get; set; }
         public string contraseña { get; set; }
         public string estado { get; set; }
+        public string nombreUsuario { get; set; }
     
         public virtual ICollection<FACTURAS> FACTURAS { get; set; }
     }

@@ -309,6 +309,7 @@
     <Content Include="less\sb-admin-2.less" />
     <Content Include="less\variables.less" />
     <Content Include="App_Themes\Estado\Estado.skin" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -337,6 +338,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="GestionVendedores.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -460,6 +462,13 @@
     <Compile Include="VENDEDORES.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="GestionVendedores.aspx.cs">
+      <DependentUpon>GestionVendedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionVendedores.aspx.designer.cs">
+      <DependentUpon>GestionVendedores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -475,6 +484,7 @@
     <Content Include="Account\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Vendedores\" />
     <Folder Include="WUC\" />
   </ItemGroup>
   <PropertyGroup>

@@ -104,9 +104,10 @@
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="nombres" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="apellido1" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="apellido2" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="porcientoComision" Type="float" Nullable="false" />
+    <Property Name="apellido2" Type="varchar" MaxLength="50" />
+    <Property Name="porcientoComision" Type="int" Nullable="false" />
     <Property Name="contraseña" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="nombreUsuario" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
   </EntityType>
   <Association Name="FK_ARTICULOS">

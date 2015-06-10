@@ -11,5 +11,15 @@ namespace SistemaFacturacion
         {
             page.Session["swal"] = sweetAlert;
         }
+
+        public static string PasswordEncode(string plainPassword)
+        {            
+            return System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(plainPassword));
+        }
+
+        public static string PasswordDecode(string EncodedPassword)
+        {
+            return System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(EncodedPassword));
+        }
     }
 }

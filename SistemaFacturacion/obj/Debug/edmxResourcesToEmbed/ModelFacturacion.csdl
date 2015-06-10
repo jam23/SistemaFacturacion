@@ -115,11 +115,12 @@
     <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="apellido1" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="apellido2" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="porcientoComision" Type="Double" Nullable="false" />
+    <Property Name="apellido2" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="porcientoComision" Type="Int32" Nullable="false" />
     <Property Name="contraseña" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
     <Property Name="estado" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
     <NavigationProperty Name="FACTURAS" Relationship="FACTURACIONModel.FK_VENDEDOR" FromRole="VENDEDORES" ToRole="FACTURAS" />
+    <Property Type="String" Name="nombreUsuario" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_ARTICULOS">
     <End Role="ARTICULOS" Type="FACTURACIONModel.ARTICULOS" Multiplicity="1" />

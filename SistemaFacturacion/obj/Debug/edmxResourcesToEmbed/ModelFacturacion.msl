@@ -73,6 +73,7 @@
     <EntitySetMapping Name="VENDEDORES">
       <EntityTypeMapping TypeName="FACTURACIONModel.VENDEDORES">
         <MappingFragment StoreEntitySet="VENDEDORES">
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombres" ColumnName="nombres" />
           <ScalarProperty Name="apellido1" ColumnName="apellido1" />
