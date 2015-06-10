@@ -208,6 +208,7 @@
     <Content Include="css\plugins\social-buttons.css" />
     <Content Include="css\plugins\timeline.css" />
     <Content Include="css\sb-admin-2.css" />
+    <Content Include="Facturacion.aspx" />
     <Content Include="font-awesome-4.1.0\css\font-awesome.css" />
     <Content Include="font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
@@ -416,6 +417,13 @@
     <Compile Include="DETALLE_FACTURA.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion.aspx.cs">
+      <DependentUpon>Facturacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion.aspx.designer.cs">
+      <DependentUpon>Facturacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FACTURAS.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -500,6 +508,7 @@
     <Content Include="Account\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Facturacion\" />
     <Folder Include="Vendedores\" />
     <Folder Include="WUC\" />
   </ItemGroup>
