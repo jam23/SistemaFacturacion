@@ -214,6 +214,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="GestionArticulos.aspx" />
     <Content Include="GestionCategorias.aspx" />
+    <Content Include="GestionClientes.aspx" />
     <Content Include="GestionCondicionesPago.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -431,6 +432,13 @@
     </Compile>
     <Compile Include="GestionCategorias.aspx.designer.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionClientes.aspx.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionClientes.aspx.designer.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionCondicionesPago.aspx.cs">
       <DependentUpon>GestionCondicionesPago.aspx</DependentUpon>

@@ -33,7 +33,6 @@
           <ScalarProperty Name="cuentaContable" ColumnName="cuentaContable" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>

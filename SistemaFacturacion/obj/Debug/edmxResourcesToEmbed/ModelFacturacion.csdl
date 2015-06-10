@@ -67,7 +67,6 @@
     <Property Name="cuentaContable" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="telefono" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
     <Property Name="email" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
-    <Property Name="contraseña" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
     <Property Name="estado" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
     <NavigationProperty Name="FACTURAS" Relationship="FACTURACIONModel.FK_CLIENTE" FromRole="CLIENTES" ToRole="FACTURAS" />
   </EntityType>

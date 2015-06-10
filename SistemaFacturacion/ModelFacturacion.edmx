@@ -69,7 +69,6 @@
           <Property Name="cuentaContable" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="telefono" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="email" Type="varchar" Nullable="false" MaxLength="80" />
-          <Property Name="contraseña" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
         </EntityType>
         <EntityType Name="CONDICIONESPAGO">
@@ -258,7 +257,6 @@
           <Property Name="cuentaContable" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="telefono" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
-          <Property Name="contraseña" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
           <NavigationProperty Name="FACTURAS" Relationship="FACTURACIONModel.FK_CLIENTE" FromRole="CLIENTES" ToRole="FACTURAS" />
         </EntityType>
@@ -423,7 +421,6 @@
                 <ScalarProperty Name="cuentaContable" ColumnName="cuentaContable" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>

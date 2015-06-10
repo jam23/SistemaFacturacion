@@ -26,7 +26,6 @@ namespace SistemaFacturacion
         public string cuentaContable { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public string contraseña { get; set; }
         public string estado { get; set; }
     
         public virtual ICollection<FACTURAS> FACTURAS { get; set; }

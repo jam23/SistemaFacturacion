@@ -64,7 +64,6 @@
     <Property Name="cuentaContable" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="telefono" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="email" Type="varchar" Nullable="false" MaxLength="80" />
-    <Property Name="contraseña" Type="varchar" Nullable="false" MaxLength="500" />
     <Property Name="estado" Type="char" Nullable="false" MaxLength="1" />
   </EntityType>
   <EntityType Name="CONDICIONESPAGO">
