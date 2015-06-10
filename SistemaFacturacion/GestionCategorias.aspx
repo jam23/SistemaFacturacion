@@ -1,15 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="GestionCategorias.aspx.cs" Inherits="SistemaFacturacion.GestionCategorias" %>
+﻿<%@ Page Theme="Estado"  Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="GestionCategorias.aspx.cs" Inherits="SistemaFacturacion.GestionCategorias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <% Page.Header.Title = "Categorias"; %>
-    <!-- DataTables JavaScript -->
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#<%=gvCategorias.ClientID%>').DataTable();
-        });
-    </script>
+    <% Page.Header.Title = "Categorias de Artículos"; %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
@@ -32,9 +25,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <asp:Label ID="Label3" runat="server" Text="Estado"></asp:Label>
-                <asp:DropDownList runat="server" ID="ddlEstado" CssClass="form-control">
-                    <asp:ListItem Selected="True" Value="A">Activo</asp:ListItem>
-                    <asp:ListItem Value="I">Inactivo</asp:ListItem>
+                <asp:DropDownList runat="server" ID="ddlEstado" SkinID="ddlEstado" >                  
                 </asp:DropDownList>
             </div>
         </div>
@@ -43,9 +34,9 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary" OnClick="btnCrear_Click" />
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click"/>
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click"/>
-                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click"/>               
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click" />
+                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click" />
             </div>
         </div>
     </div>
