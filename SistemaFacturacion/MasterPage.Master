@@ -11,8 +11,8 @@
     <!-- Bootstrap Core JavaScript -->
     <%: Scripts.Render("~/bundles/bootstrap") %>
     <%:Styles.Render("~/Content/bootstrap") %>
-    <script src="~/js/plugins/metisMenu/metisMenu.min.js"></script>
-    <script src="~/js/sb-admin-2.js"></script>
+    <script src="/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="/js/sb-admin-2.js"></script>
     <!-- DataTables CSS -->
     <%--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">--%>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -56,17 +56,17 @@
                 timer = '<%: sw.timer%>',
                 OnConfirmRedirectTo = '<%: sw.OnConfirmRedirectTo%>';
 
-                swal({
-                    title: title, text: text, type: type, allowOutsideClick: allowOutsideClick, showCancelButton: showCancelButton, confirmButtonText: confirmButtonText
-                    , confirmButtonColor: confirmButtonColor, cancelButtonText: cancelButtonText, closeOnConfirm: closeOnConfirm, imageUrl: imageUrl, timer: timer
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        if (OnConfirmRedirectTo) document.location = OnConfirmRedirectTo;
-                    } else {
+            swal({
+                title: title, text: text, type: type, allowOutsideClick: allowOutsideClick, showCancelButton: showCancelButton, confirmButtonText: confirmButtonText
+                , confirmButtonColor: confirmButtonColor, cancelButtonText: cancelButtonText, closeOnConfirm: closeOnConfirm, imageUrl: imageUrl, timer: timer
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    if (OnConfirmRedirectTo) document.location = OnConfirmRedirectTo;
+                } else {
 
-                    }
-                });
-            }, 100);
+                }
+            });
+        }, 100);
 
     </script>
     <% } Session["swal"] = null; %>
@@ -75,14 +75,17 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.table').prepend($("<thead></thead>").append($(this).find("tr:first")));
+            $('table.dataTable').each(function(index){
+                $(this).prepend($("<thead></thead>").append($(this).find("tr:first")));
+            });
+            
 
             $.extend($.fn.dataTable.defaults, {
                 language: { url: '//cdn.datatables.net/plug-ins/1.10.7/i18n/Spanish.json'},
                 stateSave: true
             });
 
-            $('.dataTable').DataTable();
+              $('table.dataTable').dataTable();
         });
 
     </script>

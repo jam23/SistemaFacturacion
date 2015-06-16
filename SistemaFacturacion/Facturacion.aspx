@@ -2,6 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%Page.Header.Title = "Facturación de Artículos"; %>
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    var articulos = $('.dataTableArticulos');
+        //    var Clientes = $('.dataTableClientes');
+        //    articulos.dataTable();
+        //    Clientes.dataTable();
+
+        //});
+        function OpenArticulosModal() {
+            $('#ArticulosModal').modal();
+        }
+        $(document).ready(function () {
+
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
@@ -80,9 +96,9 @@
                 </div>
 
             </asp:Panel>
-            <asp:Panel ID="pnlGvCliente" runat="server" Visible="false">
+            <asp:Panel ID="pnlGvCliente" runat="server" Visible="true">
                 <asp:GridView ID="gvDatosClientes" runat="server"
-                    CssClass="table table-striped table-bordered table-hover dataTable no-footer" AutoGenerateColumns="False">
+                    CssClass="table table-striped table-bordered table-hover dataTable no-footer" AutoGenerateColumns="False" Width="100%">
                     <Columns>
                         <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
@@ -97,8 +113,8 @@
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
-            <asp:Button ID="btnEspecificarCliente" runat="server" Text="Especificar Cliente" OnClick="btnEspecificarCliente_Click" />
-            <asp:Button ID="btnCancelaCliente" runat="server" Text="Limpiar" OnClick="btnCancelaCliente_Click" />
+            <asp:Button ID="btnEspecificarCliente" runat="server" CssClass="btn btn-primary" Text="Especificar Cliente" OnClick="btnEspecificarCliente_Click" />
+            <asp:Button ID="btnCancelaCliente" runat="server" CssClass="btn btn-warning" Text="Limpiar" OnClick="btnCancelaCliente_Click" />
         </div>
     </div>
 
@@ -109,7 +125,7 @@
             Articulos
         </div>
         <div class="panel-body">
-            <asp:Panel ID="pnlDatosArticulos" runat="server" Visible="false">
+            <%--<asp:Panel ID="pnlDatosArticulos" runat="server" Visible="false">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -138,26 +154,32 @@
                         </div>
                     </div>
                 </div>
+            </asp:Panel>--%>
 
-
-
-            </asp:Panel>
             <asp:Panel runat="server" ID="pnlGvArticulos" Visible="true">
                 <asp:GridView ID="gvDatosArticulos" runat="server" AutoGenerateColumns="False"
-                    CssClass="table table-striped table-bordered table-hover dataTable no-footer">
+                    CssClass="table table-striped table-bordered table-hover dataTable no-footer" Width="100%">
                     <Columns>
                         <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lkbId" runat="server" Text='<%# Bind("id") %>' OnClick="lkbId_Click"></asp:LinkButton>
+                                <asp:LinkButton ID="lkbIdArticulo"  runat="server" Text='<%# Bind("id") %>' OnClick="lkbIdArticulo_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
                         <asp:BoundField DataField="categoria" HeaderText="Categoria" />
                         <asp:BoundField DataField="precioUnitario" HeaderText="Precio Unitario" />
-                        <asp:BoundField DataField="estado" HeaderText="Estado" />
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
+           <%-- <div class="row form-inline">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <asp:Label ID="Label2" runat="server" Text="Cantidad Articulos:"></asp:Label>
+                        <asp:TextBox runat="server" ID="txtCantidadArticulo"></asp:TextBox>
+                        <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar Articulo" CssClass="btn btn-primary" />
+                    </div>
+                </div>
+            </div>--%>
         </div>
     </div>
     <div class="row">
@@ -179,24 +201,56 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <asp:GridView ID="gvClientes" runat="server"
-                CssClass="table table-striped table-bordered table-hover dataTable no-footer" AutoGenerateColumns="False">
-                <Columns>
-                    <asp:TemplateField HeaderText="ID">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lkbId" runat="server" Text='<%# Bind("id") %>' OnClick="lkbId_Click"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="nombreComercial" HeaderText="Nombre Comercial" />
-                    <asp:BoundField DataField="razonSocial" HeaderText="Razon Social" />
-                    <asp:BoundField DataField="RNC_CED" HeaderText="RNC/Cédula" />
-                    <asp:BoundField DataField="telefono" HeaderText="Telefono" />
-                    <asp:BoundField DataField="email" HeaderText="Correo Electrónico" />
-                    <asp:BoundField DataField="estado" HeaderText="Estado" />
-                </Columns>
-            </asp:GridView>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="ArticulosModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Agregar Artículo</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:Panel ID="pnlDatosArticulos" runat="server" Visible="true">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
+                                    <asp:TextBox ID="txtIdArticulo" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label7" runat="server" Text="Descripción"></asp:Label>
+                                    <asp:TextBox ID="txtDescripcion" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label15" runat="server" Text="Precio Unitario"></asp:Label>
+                                    <asp:TextBox ID="txtPrecioUnitario" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label14" runat="server" Text="Cantidad"></asp:Label>
+                                    <asp:TextBox ID="txtCantidadArticulos" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </asp:Panel>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnCerrarArticuloModal" runat="server" Text="Cerrar" data-dismiss="modal" class="btn btn-default" />
+                    <asp:Button ID="btnAgregarArticuloModal" runat="server" class="btn btn-primary" Text="Agregar" />
+
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

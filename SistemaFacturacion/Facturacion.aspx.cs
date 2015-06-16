@@ -9,6 +9,19 @@ namespace SistemaFacturacion
 {
     public partial class Facturacion : System.Web.UI.Page
     {
+
+        private void cargarCondicionPago()
+        {
+            ddlCondicionPago.DataSource = (from p in db.CONDICIONESPAGO
+                                           where p.estado.Equals("A")
+                                           select new { p.id, p.descripcion }
+                                           ).ToList();
+
+            ddlCondicionPago.DataTextField = "descripcion";
+            ddlCondicionPago.DataValueField = "id";
+            ddlCondicionPago.DataBind(); ddlCondicionPago.Items.Insert(0, new ListItem("", ""));
+        }
+
         #region MyRegion
         FACTURACIONEntities db = new FACTURACIONEntities();
         private static CRUD operacion = CRUD.Ninguna;
@@ -20,8 +33,11 @@ namespace SistemaFacturacion
             if (!IsPostBack)
             {
                 ClienteSeleccionado(null);
+                cargarGridArticulos(); //TODO: ELIMINAR
+                cargarCondicionPago();
                 cargarGridView();
-            }
+
+            }           
         }
 
         protected void lkbId_Click(object sender, EventArgs e)
@@ -240,14 +256,15 @@ namespace SistemaFacturacion
         #region Cliente
 
         private void LimpiarCamposClientes()
-        {   
+        {
+            hdfIdCliente.Value = String.Empty;
             txtNombreComercial.Text = String.Empty;
             txtRazonSocial.Text = String.Empty;
             txtCedRNC.Text = String.Empty;
             txtCuentaContable.Text = String.Empty;
             txtTelefono.Text = String.Empty;
             txtEmail.Text = String.Empty;
-            ClienteSeleccionado(null);            
+            ClienteSeleccionado(null);
         }
 
 
@@ -256,6 +273,7 @@ namespace SistemaFacturacion
         private void cargarGridDatosClientes()
         {
             gvDatosClientes.DataSource = (from c in db.CLIENTES
+                                          where c.estado.Equals("A")
                                           select new
                                           {
                                               c.id,
@@ -285,7 +303,7 @@ namespace SistemaFacturacion
             int Id = Int32.Parse(lkb.Text);
             var item = db.CLIENTES.Find(Id);
 
-            txtId.Text = Id.ToString();
+            hdfIdCliente.Value = Id.ToString();
             txtNombreComercial.Text = item.nombreComercial;
             txtRazonSocial.Text = item.razonSocial;
             txtCedRNC.Text = item.RNC_CED;
@@ -323,11 +341,45 @@ namespace SistemaFacturacion
                 btnCancelaCliente.Visible = true;
             }
         }
-        #endregion
+
 
         protected void btnCancelaCliente_Click(object sender, EventArgs e)
         {
             LimpiarCamposClientes();
         }
+        #endregion
+
+        #region Articulos
+
+        protected void lkbIdArticulo_Click(object sender, EventArgs e)
+        {          
+           
+            LinkButton lkb = (LinkButton)sender;
+            int Id = Int32.Parse(lkb.Text);
+            var item = db.ARTICULOS.Find(Id);
+
+            txtIdArticulo.Text = Id.ToString();
+            txtDescripcion.Text = item.descripcion;          
+            txtPrecioUnitario.Text = item.precioUnitario.ToString();
+            pnlDatosArticulos.Visible = true;
+            this.EjecutarJS("OpenArticulosModal();");
+        }
+
+        private void cargarGridArticulos()
+        {
+            gvDatosArticulos.DataSource = (from a in db.ARTICULOS
+                                           where a.estado.Equals("A")
+                                           select new
+                                           {
+                                               a.id,
+                                               a.descripcion,
+                                               categoria = a.CATEGORIA.descripcion,
+                                               a.precioUnitario
+                                           }
+                                         ).ToList();
+            gvDatosArticulos.DataBind();
+        }
+
+        #endregion
     }
 }
