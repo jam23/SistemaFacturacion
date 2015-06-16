@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SistemaFacturacion.Facturacion
+namespace SistemaFacturacion
 {
     public partial class Facturacion : System.Web.UI.Page
     {
+        #region MyRegion
         FACTURACIONEntities db = new FACTURACIONEntities();
         private static CRUD operacion = CRUD.Ninguna;
         SweetAlert message = new SweetAlert(showCancelButton: false);
@@ -16,8 +17,11 @@ namespace SistemaFacturacion.Facturacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ///TODO: Arreglar los nombre de las columnas del grid;
-            cargarGridView();
+            if (!IsPostBack)
+            {
+                ClienteSeleccionado(null);
+                cargarGridView();
+            }
         }
 
         protected void lkbId_Click(object sender, EventArgs e)
@@ -38,8 +42,7 @@ namespace SistemaFacturacion.Facturacion
             txtCuentaContable.Text = item.cuentaContable;
             txtTelefono.Text = item.telefono;
             txtEmail.Text = item.email;
-            ddlEstado.ClearSelection();
-            ddlEstado.Items.FindByValue(item.estado).Selected = true;
+
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -65,7 +68,7 @@ namespace SistemaFacturacion.Facturacion
                             item.cuentaContable = txtCuentaContable.Text;
                             item.telefono = txtTelefono.Text;
                             item.email = txtEmail.Text;
-                            item.estado = ddlEstado.SelectedValue;
+
 
                             db.CLIENTES.Add(item);
 
@@ -79,7 +82,7 @@ namespace SistemaFacturacion.Facturacion
                             item.cuentaContable = txtCuentaContable.Text;
                             item.telefono = txtTelefono.Text;
                             item.email = txtEmail.Text;
-                            item.estado = ddlEstado.SelectedValue;
+
                             db.Entry(item).State = System.Data.EntityState.Modified;
 
                             break;
@@ -140,22 +143,25 @@ namespace SistemaFacturacion.Facturacion
 
         private void cargarGridView()
         {
-            gvClientes.DataSource = (from c in db.CLIENTES
-                                     select new
-                                     {
-                                         c.id,
-                                         c.nombreComercial,
-                                         c.razonSocial,
-                                         c.RNC_CED,
-                                         c.telefono,
-                                         c.estado,
-                                         c.email,
-                                         c.cuentaContable
-                                     }
-                                         ).ToList();
-            gvClientes.DataBind();
+            //gvDatosClientes.DataSource = (from c in db.CLIENTES
+            //                              select new
+            //                              {
+            //                                  c.id,
+            //                                  c.nombreComercial,
+            //                                  c.razonSocial,
+            //                                  c.RNC_CED,
+            //                                  c.telefono,
+            //                                  c.estado,
+            //                                  c.email,
+            //                                  c.cuentaContable
+            //                              }
+            //                             ).ToList();
+            //gvDatosClientes.DataBind();
         }
 
+        #endregion
+
+        #region MyRegion
         /// <summary>
         /// Metodo para reiniciar todos los controles a sus estados iniciales.
         /// </summary>
@@ -173,7 +179,7 @@ namespace SistemaFacturacion.Facturacion
             btnGuardar.Enabled = false;
             btnEliminar.Enabled = false;
             btnCrear.Enabled = true;
-            ddlEstado.SelectedIndex = 0;
+
         }
 
         private bool ValidarCampos()
@@ -227,6 +233,101 @@ namespace SistemaFacturacion.Facturacion
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
+        }
+
+        #endregion
+
+        #region Cliente
+
+        private void LimpiarCamposClientes()
+        {   
+            txtNombreComercial.Text = String.Empty;
+            txtRazonSocial.Text = String.Empty;
+            txtCedRNC.Text = String.Empty;
+            txtCuentaContable.Text = String.Empty;
+            txtTelefono.Text = String.Empty;
+            txtEmail.Text = String.Empty;
+            ClienteSeleccionado(null);            
+        }
+
+
+
+        //Obtner todos los clientes y llenar el grid
+        private void cargarGridDatosClientes()
+        {
+            gvDatosClientes.DataSource = (from c in db.CLIENTES
+                                          select new
+                                          {
+                                              c.id,
+                                              c.nombreComercial,
+                                              c.razonSocial,
+                                              c.RNC_CED,
+                                              c.telefono,
+                                              c.estado,
+                                              c.email,
+                                              c.cuentaContable
+                                          }
+                                         ).ToList();
+            gvDatosClientes.DataBind();
+        }
+
+        //habilitar sección para seleccionar al cliente que se va hacer la facturación
+        protected void btnEspecificarCliente_Click(object sender, EventArgs e)
+        {
+            cargarGridDatosClientes();
+            ClienteSeleccionado(false);
+        }
+
+        //Llenar los datos del cliente seleccionado en los controles correspondientes.
+        protected void lkbIdCliente(object sender, EventArgs e)
+        {
+            LinkButton lkb = (LinkButton)sender;
+            int Id = Int32.Parse(lkb.Text);
+            var item = db.CLIENTES.Find(Id);
+
+            txtId.Text = Id.ToString();
+            txtNombreComercial.Text = item.nombreComercial;
+            txtRazonSocial.Text = item.razonSocial;
+            txtCedRNC.Text = item.RNC_CED;
+            txtCuentaContable.Text = item.cuentaContable;
+            txtTelefono.Text = item.telefono;
+            txtEmail.Text = item.email;
+            ClienteSeleccionado(true);
+        }
+
+        /// <summary>
+        /// Específicar los controles que se habilitarán si se selecciona o no un cliente.
+        /// </summary>
+        /// <param name="seleccionado"></param>
+        private void ClienteSeleccionado(bool? seleccionado)
+        {
+            if (seleccionado == null)
+            {
+                pnlDatosCliente.Visible = false;
+                pnlGvCliente.Visible = false;
+                btnEspecificarCliente.Visible = true;
+                btnCancelaCliente.Visible = false;
+            }
+            else if (seleccionado == true)
+            {
+                pnlDatosCliente.Visible = true;
+                pnlGvCliente.Visible = false;
+                btnEspecificarCliente.Visible = false;
+                btnCancelaCliente.Visible = true;
+            }
+            else if (seleccionado == false)
+            {
+                pnlDatosCliente.Visible = false;
+                pnlGvCliente.Visible = true;
+                btnEspecificarCliente.Visible = false;
+                btnCancelaCliente.Visible = true;
+            }
+        }
+        #endregion
+
+        protected void btnCancelaCliente_Click(object sender, EventArgs e)
+        {
+            LimpiarCamposClientes();
         }
     }
 }

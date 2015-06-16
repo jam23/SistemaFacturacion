@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaFacturacion.Facturacion {
+namespace SistemaFacturacion {
     
     
     public partial class Facturacion {
@@ -76,24 +76,6 @@ namespace SistemaFacturacion.Facturacion {
         protected global::System.Web.UI.WebControls.Panel pnlDatosCliente;
         
         /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// TextBox3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-        
-        /// <summary>
         /// Label8 control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,15 @@ namespace SistemaFacturacion.Facturacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreComercial;
+        
+        /// <summary>
+        /// hdfIdCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfIdCliente;
         
         /// <summary>
         /// Label9 control.
@@ -220,6 +211,24 @@ namespace SistemaFacturacion.Facturacion {
         protected global::System.Web.UI.WebControls.GridView gvDatosClientes;
         
         /// <summary>
+        /// btnEspecificarCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEspecificarCliente;
+        
+        /// <summary>
+        /// btnCancelaCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelaCliente;
+        
+        /// <summary>
         /// pnlDatosArticulos control.
         /// </summary>
         /// <remarks>
@@ -299,6 +308,24 @@ namespace SistemaFacturacion.Facturacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulos;
+        
+        /// <summary>
+        /// pnlGvArticulos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGvArticulos;
+        
+        /// <summary>
+        /// gvDatosArticulos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDatosArticulos;
         
         /// <summary>
         /// Label5 control.

@@ -175,12 +175,12 @@ namespace SistemaFacturacion {
         protected global::System.Web.UI.WebControls.Button btnCancelar;
         
         /// <summary>
-        /// gvCategorias control.
+        /// gvArticulos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCategorias;
+        protected global::System.Web.UI.WebControls.GridView gvArticulos;
     }
 }

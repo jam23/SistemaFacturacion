@@ -508,7 +508,6 @@
     <Content Include="Account\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Facturacion\" />
     <Folder Include="Vendedores\" />
     <Folder Include="WUC\" />
   </ItemGroup>

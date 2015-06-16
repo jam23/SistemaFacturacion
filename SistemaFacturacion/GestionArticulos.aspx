@@ -73,7 +73,7 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <asp:GridView ID="gvCategorias" runat="server" AutoGenerateColumns="False"
+            <asp:GridView ID="gvArticulos" runat="server" AutoGenerateColumns="False"
                 CssClass="table table-striped table-bordered table-hover dataTable no-footer">
                 <Columns>
                     <asp:TemplateField HeaderText="ID">

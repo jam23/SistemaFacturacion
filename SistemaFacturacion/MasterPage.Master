@@ -11,8 +11,8 @@
     <!-- Bootstrap Core JavaScript -->
     <%: Scripts.Render("~/bundles/bootstrap") %>
     <%:Styles.Render("~/Content/bootstrap") %>
-    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-    <script src="js/sb-admin-2.js"></script>
+    <script src="~/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="~/js/sb-admin-2.js"></script>
     <!-- DataTables CSS -->
     <%--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">--%>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -20,29 +20,29 @@
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <link href="Content/sweet-alert.css" rel="stylesheet" />
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script  type="text/javascript" src="Scripts/sweet-alert.js"></script>
+    <link href="~/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="~/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="Scripts/sweet-alert.js"></script>
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/css/sb-admin-2.css" rel="stylesheet">
 
 
-     <% if(Session["swal"] != null)
-    {
-        var sw = Session["swal"] as SweetAlert; %>
-        <script type="text/javascript">
-            $.TextDecoding = function(str)
-            {
-                if (str === "") {
-                    return "";
-                }
-                return $.parseHTML($.parseHTML(str)[0].data)[0].data
+    <% if (Session["swal"] != null)
+       {
+           var sw = Session["swal"] as SweetAlert; %>
+    <script type="text/javascript">
+        $.TextDecoding = function(str)
+        {
+            if (str === "") {
+                return "";
             }
+            return $.parseHTML($.parseHTML(str)[0].data)[0].data
+        }
 
-            setTimeout(function () {
+        setTimeout(function () {
 
-                var title = $.TextDecoding('<%: sw.title%>'),
+            var title = $.TextDecoding('<%: sw.title%>'),
                 text = $.TextDecoding('<%: sw.text%>'),
                 type = '<%: sw.type%>',
                 allowOutsideClick = <%: sw.allowOutsideClick.ToString().ToLower()%>,
@@ -68,11 +68,11 @@
                 });
             }, 100);
 
-        </script>
-   <% } Session["swal"] = null; %>
-       
+    </script>
+    <% } Session["swal"] = null; %>
 
-         
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.table').prepend($("<thead></thead>").append($(this).find("tr:first")));

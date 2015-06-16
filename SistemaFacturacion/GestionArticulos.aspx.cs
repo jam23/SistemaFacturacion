@@ -135,9 +135,9 @@ namespace SistemaFacturacion
 
         private void cargarGridView()
         {
-            gvCategorias.DataSource = (from a in db.ARTICULOS
+            gvArticulos.DataSource = (from a in db.ARTICULOS
                                        select new { a.id, a.descripcion, idCategoria = a.CATEGORIA.descripcion, a.costoUnitario, a.estado, a.precioUnitario, a.stock }).ToList();
-            gvCategorias.DataBind();
+            gvArticulos.DataBind();
         }
 
         private void cargarddlCategoria()
