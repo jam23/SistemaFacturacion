@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" Title="Register an external login" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegisterExternalLogin.aspx.cs" Inherits="SistemaFacturacion.Account.RegisterExternalLogin" %>
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Language="C#" Title="Register an external login" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="RegisterExternalLogin.aspx.cs" Inherits="SistemaFacturacion.Account.RegisterExternalLogin" %>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <hgroup class="title">
         <h1>Register with your <%: ProviderDisplayName %> account</h1>
         <h2><%: ProviderUserName %>.</h2>

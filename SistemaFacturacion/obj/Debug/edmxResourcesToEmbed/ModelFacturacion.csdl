@@ -61,7 +61,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="nombreComercial" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="nombreComercial" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
     <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
     <Property Name="RNC_CED" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
     <Property Name="cuentaContable" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
@@ -106,6 +106,8 @@
     <NavigationProperty Name="CONDICIONESPAGO" Relationship="FACTURACIONModel.FK_CONDICION_PAGO" FromRole="FACTURAS" ToRole="CONDICIONESPAGO" />
     <NavigationProperty Name="DETALLE_FACTURA" Relationship="FACTURACIONModel.FK_FACTURAS" FromRole="FACTURAS" ToRole="DETALLE_FACTURA" />
     <NavigationProperty Name="VENDEDORES" Relationship="FACTURACIONModel.FK_VENDEDOR" FromRole="FACTURAS" ToRole="VENDEDORES" />
+    <Property Type="Int32" Name="PorcentajeDescuento" Nullable="false" />
+    <Property Type="Int32" Name="ITBIS" Nullable="false" />
   </EntityType>
   <EntityType Name="VENDEDORES">
     <Key>

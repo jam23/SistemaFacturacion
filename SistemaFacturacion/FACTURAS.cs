@@ -25,6 +25,8 @@ namespace SistemaFacturacion
         public int idCliente { get; set; }
         public System.DateTime fechaRegistro { get; set; }
         public string comentario { get; set; }
+        public int PorcentajeDescuento { get; set; }
+        public int ITBIS { get; set; }
     
         public virtual CLIENTES CLIENTES { get; set; }
         public virtual CONDICIONESPAGO CONDICIONESPAGO { get; set; }

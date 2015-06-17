@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -226,6 +228,8 @@ namespace SistemaFacturacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            hdfIdVendedor.Value = "1";
             if (!IsPostBack)
             {
                 ClienteSeleccionado(null);
@@ -233,6 +237,7 @@ namespace SistemaFacturacion
                 cargarCondicionPago();
                 ArticulosFacturados.Clear(); ///TODO: Mover para el metodo ClearAll
             }
+            RealizarCalculos();
 
         }
 
@@ -247,7 +252,6 @@ namespace SistemaFacturacion
             ddlCondicionPago.DataValueField = "id";
             ddlCondicionPago.DataBind(); ddlCondicionPago.Items.Insert(0, new ListItem("", ""));
         }
-
 
         #region Cliente
 
@@ -441,7 +445,6 @@ namespace SistemaFacturacion
         private void AgregarArticulo(int IdArticulo, int CantidadArticuloFacturar)
         {
             var articulo = db.ARTICULOS.Find(IdArticulo);
-            // int CantidadArticuloFacturar = int.Parse(txtCantidadArticulos.Text);
             pnlArticulosFacturados.Visible = true;
 
             if (ArticulosFacturados.ContainsKey(articulo.id))
@@ -497,8 +500,6 @@ namespace SistemaFacturacion
         {
             bool valido = true;
             int NumeroValido = 0;
-            int CantidadFacturada = 0;
-
 
             if (string.IsNullOrEmpty(txtIdArticulo.Text) || !int.TryParse(txtIdArticulo.Text, out NumeroValido))
             {
@@ -521,11 +522,10 @@ namespace SistemaFacturacion
                 valido = false;
             }
 
-            CantidadFacturada = ArticulosFacturados.Where(a => a.Key.Equals(txtCantidadArticulos.Text)).Sum(s => s.Value);
+
             int ArticuloStock = db.ARTICULOS.Find(int.Parse(txtIdArticulo.Text)).stock;
-            if ((CantidadFacturada + NumeroValido) > ArticuloStock)
+            if (NumeroValido > ArticuloStock)
             {
-                ArticulosFacturados.Where(a => a.Key.Equals(txtCantidadArticulos.Text)).Sum(s => s.Value);
                 message.text = string.Format("La cantidad de artículos insertada no esta dísponible solo hay {0} en existencia, favor de verificar!!!", ArticuloStock);
                 valido = false;
             }
@@ -568,9 +568,9 @@ namespace SistemaFacturacion
 
         private void RealizarCalculos()
         {
-            float totalBruto = int.Parse(txtTotalBruto.Text);
-            float PorcentajeDescuento = int.Parse(txtPorcentajeDescuento.Text);
-            float PorcentajeITBIS = int.Parse(txtPorcentajeITBIS.Text);
+            float totalBruto = float.Parse(txtTotalBruto.Text);
+            float PorcentajeDescuento = float.Parse(txtPorcentajeDescuento.Text);
+            float PorcentajeITBIS = float.Parse(txtPorcentajeITBIS.Text);
 
             var dsArticulosFacturados = (from af in ArticulosFacturados
                                          from a in db.ARTICULOS
@@ -590,9 +590,11 @@ namespace SistemaFacturacion
             txtTotalBruto.Text = dsArticulosFacturados.Sum(a => a.importe).ToString();
             totalBruto = int.Parse(txtTotalBruto.Text);
             #endregion
+
             #region Descuento
             txtDescuento.Text = (totalBruto * (PorcentajeDescuento / 100)).ToString();
             #endregion
+
             #region ITBIS
             txtITBIS.Text = (totalBruto * (PorcentajeITBIS / 100)).ToString();
             #endregion
@@ -602,6 +604,134 @@ namespace SistemaFacturacion
             #endregion
         }
         #endregion
+
+        #region Facturar
+
+        protected void btnCancelarFactura_Click(object sender, EventArgs e)
+        {
+            LimpiarCamposFactura();
+        }
+
+        private void LimpiarCamposFactura()
+        {
+            LimpiarCampoArticulos();
+            LimpiarCamposClientes();
+            txtVendedor.Text = string.Empty;
+            hdfIdVendedor.Value = string.Empty;
+            ddlCondicionPago.SelectedIndex = 0;
+            txtComentario.Text = string.Empty;
+            txtPorcentajeDescuento.Text = "0";
+            txtPorcentajeITBIS.Text = "18";
+            LimpiarArticulosFacturados();
+            RealizarCalculos();
+            CargarGridArticulosFacturados();
+            pnlArticulosFacturados.Visible = false;
+
+        }
+
+        private void LimpiarArticulosFacturados()
+        {
+            foreach (var item in ArticulosFacturados)
+            {
+                if (ArticulosFacturados.ContainsKey(item.Key))
+                {
+                    db.ARTICULOS.Find(item.Key).stock += ArticulosFacturados[item.Key];
+                }
+            }
+            ArticulosFacturados.Clear();
+            db.SaveChanges();
+        }
+
+        private bool ValidatarDatosFactura()
+        {
+            message.type = "warning";
+            bool valido = true;
+            if (String.IsNullOrEmpty(hdfIdVendedor.Value)) //User.Identity.IsAuthenticated
+            {
+                valido = false;
+                message.text = "Debe Identificarse como un Vendedor valido, favor de verificar!!";
+            }
+            else if (ddlCondicionPago.SelectedIndex == 0)
+            {
+                valido = false;
+                message.text = "Debe especificar La Condición de Pago, favor de verificar!!";
+                ddlCondicionPago.Focus();
+            }
+            else if (string.IsNullOrEmpty(txtComentario.Text))
+            {
+                valido = false;
+                message.text = "El campo Comentario es requerido, favor de verificar!!";
+            }
+            else if (String.IsNullOrEmpty(hdfIdCliente.Value))
+            {
+                valido = false;
+                message.text = "Debe especificar un Cliente válido, favor de verificar!!";
+            }
+            else if (ArticulosFacturados.Count <= 0)
+            {
+                valido = false;
+                message.text = "No hay artículos facturados, favor de verificar!!";
+            }
+
+            if (!valido) this.ShowMessage(message);
+
+
+            return valido;
+        }
+
+        protected void btnGuardarFacturar_Click(object sender, EventArgs e)
+        {
+            if (ValidatarDatosFactura())
+            {
+                try
+                {
+                    using (TransactionScope trans = new TransactionScope())
+                    {   
+                        FACTURAS factura = new FACTURAS();
+                        DETALLE_FACTURA detalleFactura = new DETALLE_FACTURA();
+
+                        factura.comentario = txtComentario.Text;
+                        factura.fechaRegistro = DateTime.Now;
+                        factura.idCondicionPago = int.Parse(ddlCondicionPago.SelectedValue);
+                        factura.idVendedor = int.Parse(hdfIdVendedor.Value);
+                        factura.idCliente = int.Parse(hdfIdCliente.Value);
+                        factura.PorcentajeDescuento = int.Parse(string.IsNullOrEmpty(txtPorcentajeDescuento.Text) ? "0" : txtPorcentajeDescuento.Text);
+                        factura.ITBIS = int.Parse(string.IsNullOrEmpty(txtPorcentajeITBIS.Text) ? "0" : txtPorcentajeITBIS.Text);
+                        db.FACTURAS.Add(factura);
+
+                        foreach (var articuloFacturado in ArticulosFacturados)
+                        {
+                            detalleFactura.idArticulo = articuloFacturado.Key;
+                            detalleFactura.idFactura = factura.id;
+                            detalleFactura.precioUnitario = db.ARTICULOS.Find(articuloFacturado.Key).precioUnitario;
+                            detalleFactura.cantidad = articuloFacturado.Value;
+                            db.DETALLE_FACTURA.Add(detalleFactura);
+                        }
+
+                        db.SaveChanges();
+                        LimpiarCamposFactura();
+                        trans.Complete();
+                        message.type = "success";
+                        message.text = string.Format("Factura registrada. No. {0}", factura.id);
+                        this.ShowMessage(message);
+
+
+                    }
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+
+                }
+            }
+        }
+
+        #endregion
+
 
 
 

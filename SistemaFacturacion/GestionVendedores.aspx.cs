@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +17,7 @@ namespace SistemaFacturacion.Vendedores
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             ///TODO: Arreglar los nombre de las columnas del grid;
             cargarGridView();
         }
@@ -50,8 +52,7 @@ namespace SistemaFacturacion.Vendedores
         }
 
         private void GuardarCambiosRealizados()
-        {
-
+        {            
             if (ValidarCampos())
             {
                 try
@@ -70,6 +71,8 @@ namespace SistemaFacturacion.Vendedores
                             item.contraseña = Utilidades.PasswordEncode("contrasena01");
                             item.estado = ddlEstado.SelectedValue;
 
+                            Membership.CreateUser(txtNombreUsuario.Text, txtContraseña.Text);
+                           
                             db.VENDEDORES.Add(item);
                             break;
                         case CRUD.Actualizar:

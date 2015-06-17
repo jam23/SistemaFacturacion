@@ -16,7 +16,9 @@
 
 
         $(document).ready(function () {
-
+            $("#<%:txtPorcentajeDescuento.ClientID%>").on('blur', function (e) {
+                form1.submit();
+            });
         });
     </script>
     <style type="text/css">
@@ -26,27 +28,25 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Button ID="Button1" runat="server" Text="" style="display: none;" />
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-2">
             <div class="form-group">
                 <asp:Label ID="Label1" runat="server" Text="Id"></asp:Label>
                 <asp:TextBox ID="txtId" runat="server" ReadOnly="true"></asp:TextBox>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <asp:Label ID="Label4" runat="server" Text="Condición de Pago"></asp:Label>
-                <asp:DropDownList ID="ddlCondicionPago" CssClass="form-control" runat="server"></asp:DropDownList>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <div class="form-group">
                 <asp:Label ID="Label6" runat="server" Text="Vendedor"></asp:Label>
                 <asp:TextBox ID="txtVendedor" runat="server"></asp:TextBox>
+                <asp:HiddenField ID="hdfIdVendedor" runat="server"  />
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <asp:Label ID="Label4" runat="server" Text="Condición de Pago"></asp:Label>
+                <asp:DropDownList ID="ddlCondicionPago" CssClass="form-control" runat="server"></asp:DropDownList>
             </div>
         </div>
     </div>
@@ -246,15 +246,15 @@
                 <div class="col-lg-3">
                     <div class="form-group">
                         <asp:Label ID="Label16" runat="server" Text="Descuento (%):"></asp:Label>
-                        <asp:TextBox ID="txtPorcentajeDescuento" runat="server"  Text="0"></asp:TextBox>
+                        <asp:TextBox ID="txtPorcentajeDescuento" runat="server" Text="0"></asp:TextBox>
                         <asp:TextBox ID="txtDescuento" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
                         <asp:Label ID="Label17" runat="server" Text="ITBIS(%):"></asp:Label>
-                        <asp:TextBox ID="txtPorcentajeITBIS" runat="server"  Text="18"></asp:TextBox>
-                     <asp:TextBox ID="txtITBIS" runat="server" ReadOnly="true" ></asp:TextBox>
+                        <asp:TextBox ID="txtPorcentajeITBIS" Enabled="false" runat="server" Text="18"></asp:TextBox>
+                        <asp:TextBox ID="txtITBIS" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -320,15 +320,15 @@
     <!-- End Modal -->
 
 
-    <%--<div class="row">
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary" OnClick="btnCrear_Click" />
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click" />
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click" />
-                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click" />
+                <asp:Button ID="btnGuardarFacturar" runat="server" Text="Guardar Factura" CssClass="btn btn-success" OnClick="btnGuardarFacturar_Click" />
+               <%-- <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click" />--%>
+                <asp:Button ID="btnCancelarFactura" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelarFactura_Click" />
             </div>
         </div>
-    </div>--%>
+    </div>
 </asp:Content>
 

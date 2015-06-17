@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SistemaFacturacion
-{
-
-
-    public partial class _Default
-    {
+namespace SistemaFacturacion {
+    
+    
+    public partial class _Default {
     }
 }

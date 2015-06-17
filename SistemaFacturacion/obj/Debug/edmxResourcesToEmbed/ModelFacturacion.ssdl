@@ -58,7 +58,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="nombreComercial" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="nombreComercial" Type="varchar" MaxLength="500" />
     <Property Name="razonSocial" Type="varchar" Nullable="false" MaxLength="500" />
     <Property Name="RNC_CED" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="cuentaContable" Type="varchar" Nullable="false" MaxLength="20" />
@@ -93,6 +93,8 @@
     <Property Name="idCondicionPago" Type="int" Nullable="false" />
     <Property Name="idVendedor" Type="int" Nullable="false" />
     <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="PorcentajeDescuento" Type="int" Nullable="false" />
+    <Property Name="ITBIS" Type="int" Nullable="false" />
     <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
     <Property Name="comentario" Type="varchar" MaxLength="3000" />
   </EntityType>

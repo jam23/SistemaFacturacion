@@ -60,6 +60,8 @@
     <EntitySetMapping Name="FACTURAS">
       <EntityTypeMapping TypeName="FACTURACIONModel.FACTURAS">
         <MappingFragment StoreEntitySet="FACTURAS">
+          <ScalarProperty Name="ITBIS" ColumnName="ITBIS" />
+          <ScalarProperty Name="PorcentajeDescuento" ColumnName="PorcentajeDescuento" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idCondicionPago" ColumnName="idCondicionPago" />
           <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
