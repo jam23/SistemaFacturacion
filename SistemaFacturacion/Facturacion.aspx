@@ -4,20 +4,26 @@
     <%Page.Header.Title = "Facturación de Artículos"; %>
 
     <script type="text/javascript">
-        //$(document).ready(function () {
-        //    var articulos = $('.dataTableArticulos');
-        //    var Clientes = $('.dataTableClientes');
-        //    articulos.dataTable();
-        //    Clientes.dataTable();
-
-        //});
-        function OpenArticulosModal() {
-            $('#ArticulosModal').modal();
+        function AbrirArticulosModal() {
+            $('#ArticulosModal').modal({
+                backdrop: 'static'
+            });
         }
+
+        function CerrarArticulosModal() {
+            $('#ArticulosModal').modal('hide');
+        }
+
+
         $(document).ready(function () {
 
         });
     </script>
+    <style type="text/css">
+        .no-footer {
+            margin-right: 1px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
@@ -41,6 +47,14 @@
             <div class="form-group">
                 <asp:Label ID="Label6" runat="server" Text="Vendedor"></asp:Label>
                 <asp:TextBox ID="txtVendedor" runat="server"></asp:TextBox>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <asp:Label ID="Label5" runat="server" Text="Comentario"></asp:Label>
+                <asp:TextBox ID="txtComentario" runat="server" TextMode="MultiLine"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -162,7 +176,7 @@
                     <Columns>
                         <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lkbIdArticulo"  runat="server" Text='<%# Bind("id") %>' OnClick="lkbIdArticulo_Click"></asp:LinkButton>
+                                <asp:LinkButton ID="lkbIdArticulo" runat="server" Text='<%# Bind("id") %>' OnClick="lkbIdArticulo_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
@@ -171,7 +185,7 @@
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
-           <%-- <div class="row form-inline">
+            <%-- <div class="row form-inline">
                 <div class="col-lg-8">
                     <div class="form-group">
                         <asp:Label ID="Label2" runat="server" Text="Cantidad Articulos:"></asp:Label>
@@ -182,32 +196,84 @@
             </div>--%>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-group">
-                <asp:Label ID="Label5" runat="server" Text="Comentario"></asp:Label>
-                <asp:TextBox ID="txtComentario" runat="server" TextMode="MultiLine"></asp:TextBox>
+
+    <asp:Panel runat="server" ID="pnlArticulosFacturados" Visible="false">
+        <div class="panel panel-default">
+            <%--Articulos--%>
+            <div class="panel-heading">
+                Articulos Facturados
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <asp:GridView ID="gvArticulosFacturados" AutoGenerateColumns="false" runat="server"
+                                CssClass="table table-striped table-bordered table-hover dataTable no-footer" Width="100%">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lkbRemoverArticuloFacturado" ToolTip='<%# Bind("id") %>' runat="server" CssClass="btn btn-danger" OnClick="lkbRemoverArticuloFacturado_Click">
+                                               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%--<asp:BoundField DataField="id" HeaderText="Id" />--%>
+                                    <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+                                    <asp:BoundField DataField="categoria" HeaderText="Categoria" />
+                                    <asp:BoundField DataField="cantidadArticulo" HeaderText="Cantidad Articulos" />
+                                    <asp:BoundField DataField="precioUnitario" HeaderText="Precio Unitario" />
+                                    <asp:BoundField DataField="importe" HeaderText="Importe" />
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+
+    <div class="panel panel-default">
+        <%--Articulos--%>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <asp:Label ID="Label2" runat="server" Text="Total Bruto:"></asp:Label>
+                        <asp:TextBox ID="txtTotalBruto" runat="server" Text="0" ReadOnly="true"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <asp:Label ID="Label16" runat="server" Text="Descuento (%):"></asp:Label>
+                        <asp:TextBox ID="txtPorcentajeDescuento" runat="server"  Text="0"></asp:TextBox>
+                        <asp:TextBox ID="txtDescuento" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <asp:Label ID="Label17" runat="server" Text="ITBIS(%):"></asp:Label>
+                        <asp:TextBox ID="txtPorcentajeITBIS" runat="server"  Text="18"></asp:TextBox>
+                     <asp:TextBox ID="txtITBIS" runat="server" ReadOnly="true" ></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <asp:Label ID="Label18" runat="server" Text="Total:"></asp:Label>
+                        <asp:TextBox ID="txtTotalNeto" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary" OnClick="btnCrear_Click" />
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click" />
-                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click" />
-                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click" />
-            </div>
-        </div>
-    </div>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="ArticulosModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                     <h4 class="modal-title" id="myModalLabel">Agregar Artículo</h4>
                 </div>
                 <div class="modal-body">
@@ -236,22 +302,33 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <asp:Label ID="Label14" runat="server" Text="Cantidad"></asp:Label>
-                                    <asp:TextBox ID="txtCantidadArticulos" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtCantidadArticulos" runat="server" AutoCompleteType="None"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
 
-
-
                     </asp:Panel>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnCerrarArticuloModal" runat="server" Text="Cerrar" data-dismiss="modal" class="btn btn-default" />
-                    <asp:Button ID="btnAgregarArticuloModal" runat="server" class="btn btn-primary" Text="Agregar" />
+                    <asp:Button ID="btnCerrarArticuloModal" runat="server" Text="Cerrar" class="btn btn-default" OnClick="btnCerrarArticuloModal_Click" />
+                    <asp:Button ID="btnAgregarArticuloModal" runat="server" class="btn btn-primary" Text="Agregar" OnClick="btnAgregarArticuloModal_Click" />
 
                 </div>
             </div>
         </div>
     </div>
+    <!-- End Modal -->
+
+
+    <%--<div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary" OnClick="btnCrear_Click" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" Enabled="false" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" Enabled="false" OnClick="btnEliminar_Click" />
+                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-warning" OnClick="btnCancelar_Click" />
+            </div>
+        </div>
+    </div>--%>
 </asp:Content>
 
