@@ -4,21 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c4e0d87b011c49e9951d257f1affd025" Name="Diagram1">
+      <Diagram DiagramId="c4e0d87b011c49e9951d257f1affd025" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="FACTURACIONModel.ARTICULOS" Width="1.5" PointX="7.875" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FACTURACIONModel.CATEGORIA" Width="1.5" PointX="10" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="FACTURACIONModel.CLIENTES" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FACTURACIONModel.CONDICIONESPAGO" Width="1.5" PointX="5.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FACTURACIONModel.DETALLE_FACTURA" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.CONDICIONESPAGO" Width="3.125" PointX="5.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FACTURACIONModel.DETALLE_FACTURA" Width="2.125" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FACTURACIONModel.FACTURAS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="FACTURACIONModel.VENDEDORES" Width="1.5" PointX="2.5" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="FACTURACIONModel.FK_ARTICULOS" ManuallyRouted="false" />
         <AssociationConnector Association="FACTURACIONModel.FK_CATEGORIA" ManuallyRouted="false" />
         <AssociationConnector Association="FACTURACIONModel.FK_CLIENTE" ManuallyRouted="false" />
-        <AssociationConnector Association="FACTURACIONModel.FK_CONDICION_PAGO" ManuallyRouted="true" >
-          <ConnectorPoint PointX="7.03125" PointY="4.625" />
-          <ConnectorPoint PointX="7.03125" PointY="3.4059456380208335" />
-          <ConnectorPoint PointX="4.5" PointY="3.4059456380208335" />
+        <AssociationConnector Association="FACTURACIONModel.FK_CONDICION_PAGO" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="FACTURACIONModel.FK_FACTURAS" ManuallyRouted="false" />
         <AssociationConnector Association="FACTURACIONModel.FK_VENDEDOR" ManuallyRouted="false" />

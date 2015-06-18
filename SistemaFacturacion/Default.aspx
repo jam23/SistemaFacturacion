@@ -1,7 +1,14 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SistemaFacturacion._Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SistemaFacturacion._Default" %>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1">
-    <section class="featured">
+    <a href="GestionArticulos.aspx">Gestion Articulos </a> <br />
+    <a href="GestionCategorias.aspx">Gestion Categorias</a><br />
+    <a href="GestionClientes.aspx">Gestion Clientes </a><br />
+    <a href="GestionVendedores.aspx">Gestion Vendedores</a><br />
+    <a href="GestionCondicionesPago.aspx">Gestion Condiciones de Pago</a><br />
+    <a href="Facturacion.aspx">Facturacion</a><br />
+
+    <%--<section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1><%: Title %>.</h1>
@@ -16,7 +23,7 @@
         </div>
     </section>
 <%--</asp:Content>
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="Content2">--%>
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="Content2">
     <h3>We suggest the following:</h3>
     <ol class="round">
         <li class="one">
@@ -35,5 +42,5 @@
             You can easily find a web hosting company that offers the right mix of features and price for your applications.
             <a href="http://go.microsoft.com/fwlink/?LinkId=245143">Learn more…</a>
         </li>
-    </ol>
+    </ol>--%>
 </asp:Content>

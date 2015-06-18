@@ -39,7 +39,7 @@
         <div class="col-lg-7">
             <div class="form-group">
                 <asp:Label ID="Label6" runat="server" Text="Vendedor"></asp:Label>
-                <asp:TextBox ID="txtVendedor" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtVendedor" runat="server" ReadOnly="true"></asp:TextBox>
                 <asp:HiddenField ID="hdfIdVendedor" runat="server"  />
             </div>
         </div>

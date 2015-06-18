@@ -319,6 +319,17 @@
     <Content Include="less\variables.less" />
     <Content Include="App_Themes\Estado\Estado.skin" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="FACTURACIONDataSet.xsc">
+      <DependentUpon>FACTURACIONDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="FACTURACIONDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FACTURACIONDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FACTURACIONDataSet.xss">
+      <DependentUpon>FACTURACIONDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -429,6 +440,11 @@
     </Compile>
     <Compile Include="Facturacion.aspx.designer.cs">
       <DependentUpon>Facturacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FACTURACIONDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FACTURACIONDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="FACTURAS.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>

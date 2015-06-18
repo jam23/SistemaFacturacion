@@ -122,7 +122,7 @@ namespace SistemaFacturacion.Vendedores
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             operacion = CRUD.Crear;
-            txtContraseña.Text = "constrasena01";
+            txtContraseña.Text = "contrasena01";
             txtContraseña.Enabled = false;
             btnGuardar.Enabled = true;
         }
